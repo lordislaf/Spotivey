@@ -1,0 +1,120 @@
+import _extends from "@babel/runtime/helpers/esm/extends";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import * as React from 'react';
+import clsx from 'clsx';
+import Slider, { sliderClasses } from '@mui/material/Slider';
+import Tooltip from '@mui/material/Tooltip';
+import { debounce } from '@mui/material/utils';
+import { alpha, styled } from '@mui/material/styles';
+import { jsx as _jsx } from "react/jsx-runtime";
+var StyledSlider = styled(Slider)(function (_ref) {
+  var _ref2;
+
+  var theme = _ref.theme;
+  return _ref2 = {
+    display: 'flex',
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
+    borderRadius: 0
+  }, _defineProperty(_ref2, "& .".concat(sliderClasses.rail), {
+    height: '100%',
+    backgroundColor: 'transparent'
+  }), _defineProperty(_ref2, "& .".concat(sliderClasses.track), {
+    height: '100%',
+    transition: theme.transitions.create('background-color', {
+      duration: theme.transitions.duration.shorter
+    }),
+    '&.low': {
+      backgroundColor: '#f44336'
+    },
+    '&.medium': {
+      backgroundColor: '#efbb5aa3'
+    },
+    '&.high': {
+      backgroundColor: '#088208a3'
+    }
+  }), _defineProperty(_ref2, "& .".concat(sliderClasses.thumb), {
+    height: '100%',
+    width: 5,
+    borderRadius: 0,
+    marginTop: 0,
+    backgroundColor: alpha('#000000', 0.2)
+  }), _ref2;
+});
+
+var ValueLabelComponent = function ValueLabelComponent(props) {
+  var children = props.children,
+      open = props.open,
+      value = props.value;
+  return /*#__PURE__*/_jsx(Tooltip, {
+    open: open,
+    enterTouchDelay: 0,
+    placement: "top",
+    title: value,
+    children: children
+  });
+};
+
+function EditProgress(props) {
+  var id = props.id,
+      value = props.value,
+      api = props.api,
+      field = props.field;
+
+  var _React$useState = React.useState(Number(value)),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      valueState = _React$useState2[0],
+      setValueState = _React$useState2[1];
+
+  var updateCellEditProps = React.useCallback(function (newValue) {
+    api.setEditCellValue({
+      id: id,
+      field: field,
+      value: newValue
+    });
+  }, [api, field, id]);
+  var debouncedUpdateCellEditProps = React.useMemo(function () {
+    return debounce(updateCellEditProps, 60);
+  }, [updateCellEditProps]);
+
+  var handleChange = function handleChange(event, newValue) {
+    setValueState(newValue);
+    debouncedUpdateCellEditProps(newValue);
+  };
+
+  React.useEffect(function () {
+    setValueState(Number(value));
+  }, [value]);
+
+  var handleRef = function handleRef(element) {
+    if (element) {
+      element.querySelector('[type="range"]').focus();
+    }
+  };
+
+  return /*#__PURE__*/_jsx(StyledSlider, {
+    ref: handleRef,
+    classes: {
+      track: clsx(valueState < 0.3 && "low", valueState >= 0.3 && valueState <= 0.7 && "medium", valueState > 0.7 && "high")
+    },
+    value: valueState,
+    max: 1,
+    step: 0.00001,
+    onChange: handleChange,
+    components: {
+      ValueLabel: ValueLabelComponent
+    },
+    valueLabelDisplay: "auto",
+    valueLabelFormat: function valueLabelFormat(newValue) {
+      return "".concat((newValue * 100).toLocaleString(), " %");
+    }
+  });
+}
+
+export function renderEditProgress(params) {
+  return /*#__PURE__*/_jsx(EditProgress, _extends({}, params));
+}

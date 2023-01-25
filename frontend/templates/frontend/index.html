@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+	  <meta http-equiv="Expires" content="0" />
+    <title>Spotivey</title>
+    {% load static %}
+    {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    /> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/swiper-bundle.min.css" %}"/>
+    {% comment %} <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    /> {% endcomment %}
+    <link rel="icon" href="../static/images/logo_grau-schwarz.png">
+    {% comment %} <link href="//fonts.cdnfonts.com/css/krona-one" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Federo" />
+    <link href='//fonts.googleapis.com/css?family=Syne' rel='stylesheet'>
+    <link href="//fonts.cdnfonts.com/css/arsenic" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Quicksand:wght@700" rel="stylesheet"> {% endcomment %}
+    <!--<link rel="icon" href="../static/images/TU-Berlin-Logo.svg"> -->
+  </head>
+  <body>
+    <div id="main">
+      <div id="app"></div>
+    </div>
+
+    <script src="{% static "frontend/main.js" %}"></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.licenseDecodeCli = licenseDecodeCli;
+exports.licenseGenCli = licenseGenCli;
+
+var yargs = _interopRequireWildcard(require("yargs"));
+
+var _generateLicense = require("../generateLicense/generateLicense");
+
+var _base = require("../encoding/base64");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/* eslint-disable no-console */
+const oneDayInMs = 1000 * 60 * 60 * 24;
+
+function licenseDecodeCli() {
+  yargs.command({
+    command: '$0',
+    describe: 'Decode a license key',
+    builder: command => {
+      return command.option('key', {
+        default: '',
+        alias: 'k',
+        describe: 'License key.',
+        type: 'string'
+      });
+    },
+    handler: argv => {
+      if (!argv.key) {
+        throw new Error('MUI: You forgot to pass a license key. $ > licensegen -k xxx');
+      }
+
+      console.log(`Decoding license key "${argv.key}"`);
+      const license = (0, _base.base64Decode)(argv.key.substr(32));
+      console.log(`Decoded license: \n${license}`);
+    }
+  }).help().strict(true).version(false).parse();
+}
+
+function licenseGenCli() {
+  yargs.command({
+    command: '$0',
+    describe: 'Generates a license key',
+    builder: command => {
+      return command.option('order', {
+        default: '',
+        alias: 'o',
+        describe: 'Order number id.',
+        type: 'string'
+      }).option('expiry', {
+        default: '366',
+        describe: 'Number of days from now until expiry date.',
+        type: 'string'
+      });
+    },
+    handler: argv => {
+      if (!argv.order) {
+        throw new Error('MUI: You forgot to pass an order number. $ > licensegen -o order_123.');
+      }
+
+      const licenseDetails = {
+        expiryDate: new Date(new Date().getTime() + parseInt(argv.expiry, 10) * oneDayInMs),
+        orderNumber: argv.order
+      };
+      console.log(`Generating new license number for order ${licenseDetails.orderNumber} with expiry date ${licenseDetails.expiryDate.toLocaleDateString()}`);
+      const license = (0, _generateLicense.generateLicence)(licenseDetails);
+      console.log(`New license: \n${license}`);
+    }
+  }).help().strict(true).version(false).parse();
+}
