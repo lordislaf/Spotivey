@@ -1,4 +1,7 @@
-[TU Berlin](https://upload.wikimedia.org/wikipedia/commons/2/2e/Logo_der_Technischen_Universit%C3%A4t_Berlin.svg)
+<div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Logo_der_Technischen_Universit%C3%A4t_Berlin.svg" height=100>
+    <img src="https://www.static.tu.berlin/fileadmin/www/_processed_/2/1/csm_logo_grau-schwarz_03df69556e.png" width=100 height=100>
+</div>
 
 # Spotivey
 This is a repository of the web app Spotivey, which was developed in the context of a master's thesis in the Audio Communication and Technology department at the TU Berlin.
