@@ -77,7 +77,7 @@ Finally, change the setting by adjusting the Redirect URIs. Here you name the UR
 
 For local use/testing of the app without a server, the localhost (e.g. http://127.0.0.1:8000/spotify/redirect and http://127.0.0.1:8000/spotify/redirect2) is named.
 
-\_Note_/: Two redirect URLs must always be used
+\_Note_\: Two redirect URLs must always be used
 
 ## Create spotify/credentials.py
 
