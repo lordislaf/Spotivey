@@ -1,11 +1,4 @@
-from platform import release
-import discogs_client
-from discogs_client.exceptions import HTTPError
-from urllib.parse import urlparse
-import urllib.request
-import urllib
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import redirect
 from .credentials import REDIRECT_URI, CLIENT_SECRET, CLIENT_ID, REDIRECT_URI2
 from rest_framework.views import APIView
 from requests import Request, post
@@ -13,15 +6,14 @@ from rest_framework import status
 from rest_framework.response import Response
 from .util import *
 from api.models import Room, Settings
-import musicbrainzngs
-import json
 import numpy as np
 import random
 from .models import *
 import string
 
 def get_random_string(length):
-    # choose from all lowercase letter
+    #for state
+
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
 
@@ -29,6 +21,9 @@ def get_random_string(length):
 
 
 class AuthURL(APIView):
+    # Get autification-url from Spotify.
+    # The retrieval setting is determined on the basis of scope.
+
     lookup_url_kwarg = 'surveyid'
     def get(self, request, fornat=None):
         surveyID = request.GET.get(self.lookup_url_kwarg)
@@ -76,6 +71,8 @@ class AuthURL(APIView):
 
 
 class AuthURL2(APIView):
+    # Get autification-url from Spotify for audio features.
+
     def get(self, request, fornat=None):
 
         state = get_random_string(16)
@@ -92,6 +89,8 @@ class AuthURL2(APIView):
 
 
 def spotify_callback(request, format=None):
+    # Redirect from Spotify to Spotivey Participant Page
+
     code = request.GET.get('code')
     error = request.GET.get('error')
 
@@ -121,6 +120,8 @@ def spotify_callback(request, format=None):
 
 
 def spotify_callback2(request, format=None):
+    # Redirect from Spotify to Spotivey Researcher Page
+
     code = request.GET.get('code')
     error = request.GET.get('error')
 
@@ -149,6 +150,8 @@ def spotify_callback2(request, format=None):
 
 
 class IsAuthenticated(APIView):
+    # check autentification status
+
     def get(self, request, format=None):
         is_authenticated = is_spotify_authenticated(
             self.request.session.session_key)
@@ -156,6 +159,8 @@ class IsAuthenticated(APIView):
 
 
 class GetAudioFeaturesSpotify(APIView):
+    # get audiofeatures
+
     lookup_url_kwarg_ID = 'surveyID'
     lookup_url_kwarg_dataString = 'dataString'
     def get(self, request, format=None):
@@ -185,8 +190,6 @@ class GetAudioFeaturesSpotify(APIView):
                     participant_list.append(Participant.objects.get(id=trackListResult[1]))
                     participant_id_list.append(Participant.objects.filter(id=trackListResult[1]).values_list('participant')[0][0])
                     id_list.append(trackListResult[0].get('spotify_id'))
-
-            
 
             maxResponse = 100
             von = 0
@@ -291,6 +294,8 @@ class GetAudioFeaturesSpotify(APIView):
             return Response({'Bad Request': 'Code parameter not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
 class TopArtists(APIView):
+    # get top artists
+
     lookup_url_kwarg_limit = 'limit'
     lookup_url_kwarg_timeRange = 'timeRange'
     def post(self, request, format=None):
@@ -379,6 +384,7 @@ class TopArtists(APIView):
 
 
 class TopTracks(APIView):
+    # get top tracks
     lookup_url_kwarg_limit = 'limit'
     lookup_url_kwarg_timeRange = 'timeRange'
 
@@ -505,6 +511,8 @@ class TopTracks(APIView):
 
 
 class GetSavedTracksSpotify(APIView):
+    # get saved tracks
+
     lookup_url_kwarg_limit = 'limit'
     lookup_url_kwarg_market = 'market'
 
@@ -641,6 +649,8 @@ class GetSavedTracksSpotify(APIView):
 
 
 class GetUsersProfileSpotify(APIView):
+    # get users profile
+
     def post(self, request):
         room_code = self.request.session.get('room_code')
         roommodel = Room.objects.filter(code=room_code)
@@ -691,6 +701,8 @@ class GetUsersProfileSpotify(APIView):
 
 
 class GetFollowedArtistsSpotify(APIView):
+    # get followed artists
+
     lookup_url_kwarg_limit = 'limit'
     def post(self, request, format=None):
         room_code = self.request.session.get('room_code')
@@ -777,6 +789,8 @@ class GetFollowedArtistsSpotify(APIView):
 
 
 class GetPlaylistsSpotify(APIView):
+    # get playlists
+
     lookup_url_kwarg_limit = 'limit'
     lookup_url_kwarg_public = 'public'
     def post(self, request, format=None):
@@ -905,6 +919,8 @@ class GetPlaylistsSpotify(APIView):
 
 
 class GetRecentlyPlayedTracksSpotify(APIView):
+    # get recently played tracks
+
     lookup_url_kwarg_limit = 'limit'
     def post(self, request, format=None):
         room_code = self.request.session.get('room_code')

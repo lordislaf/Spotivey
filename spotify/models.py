@@ -1,6 +1,6 @@
 from turtle import mode
 from django.db import models
-from api.models import Room, Settings
+from api.models import Settings
 
 class SpotifyToken(models.Model):
     user = models.CharField(max_length=50, unique=True)
@@ -9,14 +9,6 @@ class SpotifyToken(models.Model):
     access_token = models.CharField(max_length=150)
     expires_in = models.DateTimeField()
     token_type = models.CharField(max_length=50)
-
-class ErgebnisTracks10(models.Model):
-    code = models.CharField(max_length=50, default=[])
-    track_info = models.JSONField(default=dict)
-
-class ErgebnisTracks_checked(models.Model):
-    code = models.CharField(max_length=50, default=[])
-    track_info = models.JSONField(default=dict)
 
 class Participant(models.Model):
     participant = models.CharField(max_length=50, default='')
@@ -76,12 +68,6 @@ class RecentlyTracksSpotify(models.Model):
     recentlyTracksData = models.JSONField(default=dict)
     confirm = models.BooleanField(default=False)    #ist überhaupt bestätigt?
     settings = models.ForeignKey(Settings, on_delete=models.CASCADE, null= True, blank=True)
-
-class SpotifyConfirm(models.Model):
-    surveyID = models.CharField(max_length=50, default='')
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, null= True, blank=True)
-    dataConfirm = models.JSONField(default=dict)
-    fieldEntries = models.CharField(max_length=50, default=50)
 
 class SpotifyAudioFeatures(models.Model):
     surveyID = models.CharField(max_length=50, default='')
