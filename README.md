@@ -92,3 +92,12 @@ REDIRECT_URI2 = "YOUR REDIRECT_URI2"
 ```
 
 Finally, change in ```./spotify/views.py``` line 148
+
+# Deployment
+There are a variety of ways to deploy Spotivey to a server.
+First, you should check Django's [deployment checklist](https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/).
+
+One possibility we are suggesting here is that the Django app is integrated into Apache using Phusion Passenger (libapache2-mod-passenger). 
+This also works as a standalone or NGINX variant.
+
+For more information have a look at the following [documentation](https://www.phusionpassenger.com/docs/advanced_guides/install_and_upgrade/apache/install/)
