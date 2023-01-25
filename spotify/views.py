@@ -145,8 +145,7 @@ def spotify_callback2(request, format=None):
     update_or_create_user_tokens(
         request.session.session_key, access_token, token_type, expires_in, refresh_token)
     
-    #return redirect('https://spotiveys.users.ak.tu-berlin.de/user/results')
-    return redirect('https://127.0.0.1:8000/user/results')
+    return redirect('https://127.0.0.1:8000/user/results') ###CHANGE THIS LINE
 
 
 class IsAuthenticated(APIView):
