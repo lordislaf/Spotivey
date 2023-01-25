@@ -2,7 +2,6 @@ from django.db import models
 from rest_framework import serializers
 from .models import Room
 from django.contrib.auth.models import User
-#from ../spotify/models import ErgebnisTracks10 """
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
