@@ -57,3 +57,38 @@ Once you have installed all the necessary packages, you can test whether the cod
 4. run: ```python ./manage.py runserver```
 
 You should now see the Spotivey user interface at ```http://127.0.0.1:8000/login```.
+
+Spotivey does not work yet. 
+There are still a few steps missing.
+
+# Developers Account on Spotify
+
+Before we can use Spotivey and its functions, a Spotify Developer account must have been created.
+To do this, go to the [Spotify for Developers](https://developer.spotify.com/dashboard/) page.
+
+Once you have logged in, create a new app. 
+Now give the app a suitable name (e.g. Spotivey) and a description in which you highlight data protection.
+The description should also be transparent for Spotify.
+
+Afterwards, each developer app has a client ID and a client secret. 
+These are to be kept secret.
+
+Finally, change the setting by adjusting the Redirect URIs. Here you name the URLs to which Spotify redirects. Once within the survey (<YOUR-SERVER>/spotify/redirect) and once within the results page (<YOUR-SERVER>/spotify/redirect2).
+
+For local use/testing of the app without a server, the localhost (e.g. http://127.0.0.1:8000/spotify/redirect and http://127.0.0.1:8000/spotify/redirect2) is named.
+
+\_Note\_: Two redirect URLs must always be used
+
+## Create spotify/credentials.py
+
+Once you have two REDIRECT_URI, the CLIENT_ID and the CLIENT_SECRET, now create a Credentials.py file and add it to the /spotify folder. 
+Now add
+
+```
+CLIENT_ID = "YOUR CLIENT_ID"
+CLIENT_SECRET = "YOUR CLIENT_SECRET"
+REDIRECT_URI = "YOUR REDIRECT_URI"
+REDIRECT_URI2 = "YOUR REDIRECT_URI2"
+```
+
+Finally, change in ```./spotify/views.py``` line 148
