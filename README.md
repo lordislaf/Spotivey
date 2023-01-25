@@ -49,3 +49,11 @@ In the next step, load the repository into your project folder and install the n
 2. activate your virtualenv
 3. run: ```pip install -r requirements.txt``` in your shell.
 
+Once you have installed all the necessary packages, you can test whether the code runs locally. To do this, go through the following steps.
+
+1. cd to the directory where manage.py is located
+2. run: ```python ./manage.py makemigrations```
+3. run: ```python ./manage.py migrate```
+4. run: ```python ./manage.py runserver```
+
+You should now see the Spotivey user interface at ```http://127.0.0.1:8000/login```.
