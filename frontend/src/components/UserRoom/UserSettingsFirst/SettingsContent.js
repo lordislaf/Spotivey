@@ -183,7 +183,7 @@ export default function SettingsContent(props) {
             Retrieval Settings
         </h1>
         <h3 class='settings-overview-text'>
-            To save your first profile, press the "New Profile" button. 
+            In order to create your first profile, press the "New Profile" button. 
             This will redirect you to a new page. There you can create and save a profile.
             <br></br>
             If you want to delete or update an existing profile, 

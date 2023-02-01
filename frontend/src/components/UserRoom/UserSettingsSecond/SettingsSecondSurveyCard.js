@@ -72,7 +72,8 @@ export default function SettingsSecondSurveyCard(props) {
                             surveyID: selectedRowSettings[0].umfrageID,
                             surveyIDsecond: selectedRowSettings[0].umfrageIDsecond !== '' ? 
                                 selectedRowSettings[0].umfrageIDsecond : 
-                                null
+                                null,
+                            endURL: selectedRowSettings[0].endURL
                         }
                     })
                 }}
@@ -139,7 +140,8 @@ export default function SettingsSecondSurveyCard(props) {
                 Similar to your retrieval setting, press <i>Edit Follow-Up Settings</i> to edit the profile in depth.
             </h3>
             <h3 class='settings-overview-text'>
-                To delete the follow-up setting press the button <i>Delete Follow-Up Settings</i> after checking the checkbox.
+                In order to delete your follow-up setting, press the button <i>Delete Follow-Up Settings</i>after 
+                checking a checkbox.
                 To change the setting, delete the setting first.
             </h3>
             <div className="settings-table-button-container">

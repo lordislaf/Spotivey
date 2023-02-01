@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from "react-router";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -16,17 +16,28 @@ export default function SettingsPageSecond() {
     const surveyID = location.state.surveyID
 
     const [secondSurveyServer, setSecondSurveyServer] = useState('https://student-surveys.ak.tu-berlin.de')
-    const [secondSurveyID, setSecondSurveyID] = useState('')
+    const [secondSurveyID, setSecondSurveyID] = useState(location?.state.surveyIDsecond?location.state.surveyIDsecond:'')
     const [secondSurveyLanguage, setSecondSurveyLanguage] = useState('de')
 
     const [changeURLCheck, setChangeURLCheck] = useState(false)
 
-    const [endURL, setEndURL] = useState('')
+    const [endURL, setEndURL] = useState(
+        location?.state.endURL ?
+            location.state.endURL : 
+            'https://student-surveys.ak.tu-berlin.de/index.php/'+location?.state.surveyIDsecond+'?lang=de&newtest=Y'
+    )
 
     const [username, setUsername] = useState('')
 
+    const url = useRef(location.state.surveyIDsecond ?
+        'https://student-surveys.ak.tu-berlin.de/index.php/'+location.state.surveyIDsecond+'?lang=de&newtest=Y' :
+        'https://student-surveys.ak.tu-berlin.de/index.php/?lang=de&newtest=Y'
+        )
+
     useEffect(() => {
-        setEndURL(secondSurveyServer+'/index.php/'+secondSurveyID+'?lang='+secondSurveyLanguage+'&newtest=Y')
+        if (url.current != secondSurveyServer+'/index.php/'+secondSurveyID+'?lang='+secondSurveyLanguage+'&newtest=Y'){
+            setEndURL(secondSurveyServer+'/index.php/'+secondSurveyID+'?lang='+secondSurveyLanguage+'&newtest=Y')
+        }
     }, [secondSurveyServer, secondSurveyID, secondSurveyLanguage])
 
     useEffect(() => {
@@ -151,7 +162,7 @@ export default function SettingsPageSecond() {
                 </div>
             </div>
             <div className="settings-second-next-button">
-                {!location.state.surveyIDsecond ? 
+                {!location.state.endURL ? 
                 <Button 
                     variant="contained" 
                     endIcon={<SaveOutlinedIcon />} 

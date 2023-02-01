@@ -1019,11 +1019,17 @@ export default function UserTutorialPage(props) {
                           Tutorial
                       </h1>
                       <div className="privacy-banner-subtitle-container">
+                        {lang==='de' ? 
+                          <h2 className="privacy-banner-subtitle">
+                            Im Folgenden wird die Nutzung von "Spotiveys" mit Hilfe eines Tutorials veranschaulicht. 
+                            Grundlegende Vorkenntnisse im Umgang mit der Spotify-API und der Nutzung einer 
+                            Online-Umfrageanwendung wird vorausgesetzt.
+                          </h2> : 
                           <h2 className="privacy-banner-subtitle">
                             In the following, the use of "Spotiveys" is illustrated with the help of a tutorial. 
                             A basic prior knowledge with the handling of the Spotify API and 
                             the use of an online survey application is assumed.
-                          </h2>
+                          </h2>}
                       </div>
                     </div>
                     <div className="tutorial-content-container">

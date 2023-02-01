@@ -120,7 +120,8 @@ export default function OverviewContent(username){
                             	We recommend to use Spotivey together with LimeSurvey. 
                                 However, most other online survey applications should work, too. 
                                 If you have no knowledge of using online survey applications yet, 
-                                feel free to watch this LimeSurvey tutorial to get a first impression.
+                                feel free to watch this LimeSurvey <a href="https://www.youtube.com/watch?v=6CmprzyzMEQ" target={'_blank'}>
+                                    tutorial</a> to get a first impression.
                             </li>
                         </ul>
                     </h3>
@@ -156,6 +157,8 @@ export default function OverviewContent(username){
                     <h3 class='settings-overview-text'>
                         In the result sections, you can inspect, delete and CSV-export all Spotify data 
                         that has already been retrieved from your survey respondents. <br></br>
+                        Logging in to Spotify is initially required. 
+                        Spotivey can get Spotify audio features through the Spotify API. <br></br>
                         Click <a href='/user/results'>here</a> to inspect hitherto results. 
                         <br></br> <br></br>
                         If you need further explanations on how to use the Spotify web application, 
