@@ -12,7 +12,8 @@ Since music listening nowadays happens increasingly via streaming services such 
 # How does Spotivey work?
 To address these challenges, the web application Spotivey was developed. It allows to easily integrate most user data retrieval functions of the Spotify API within an online survey (e.g. the open source survey creation tool LimeSurvey) in compliance with EU data protection regulations. In this way, individual music usage data can be fetched without web programming knowledge and linked directly with socio-demographic information from a questionnaire (see Figure 1). Optionally, it is possible to ask survey participants to confirm individual results of Spotify data retrieval via a separate window, for example to exclude transactional data stemming from another person using the same account. Furthermore, Spotify helps to automatically create LimeSurvey questions with reference to the collected music usage data for an optional follow-up online survey to be administered directly following data retrieval. For example, if the participants' last 20 songs listened to were fetched, their perceived emotional expression could then be asked for via rating items and a web music player. In general, results from Spotify API queries may be either displayed in the user area of Spotivey for a quick overview or downloaded together with the survey respondent ID in a CSV file for extended statistical analyses.
 
-![image](https://user-images.githubusercontent.com/95614774/216023496-1c88b289-923d-4719-8c31-fce72326e410.png)
+![Masterarbeit_Uebersicht_Web-APP2](https://user-images.githubusercontent.com/95614774/216023852-c8596050-834c-477b-ae19-ebd95b160bed.svg)
+*Fig. 1: Individual music usage data can be linked directly with socio-demographic information from a questionnaire*
 
 # How to deploy and run Spotify on your own server
 ## First - create a Django Project
