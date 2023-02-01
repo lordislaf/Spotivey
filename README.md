@@ -15,7 +15,7 @@ To address these challenges, the web application Spotivey was developed. It allo
 ![Masterarbeit_Uebersicht_Web-APP2](https://user-images.githubusercontent.com/95614774/216023852-c8596050-834c-477b-ae19-ebd95b160bed.svg)
 *Fig. 1: Individual music usage data can be linked directly with socio-demographic information from a questionnaire*
 
-# How to deploy and run Spotify on your own server
+# How to deploy and run Spotivey on your own server
 ## First - create a Django Project
 First you need to create a Django project. 
 You can use the [tutorial](https://code.visualstudio.com/docs/python/tutorial-django) for this. 
