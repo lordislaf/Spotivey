@@ -115,3 +115,10 @@ One possibility we are suggesting here is that the Django app is integrated into
 This also works as a standalone or NGINX variant.
 
 For more information have a look at the following [documentation](https://www.phusionpassenger.com/docs/advanced_guides/install_and_upgrade/apache/install/)
+    
+## Admin-Page
+Spotivey offers an admin area. To access it, an admin must be created using the command ```python ./manage.py createsuperuser```.
+The admin area is accessible under the URL extension ```/admin```.
+There you can give users administrative rights, check the results and delete them if necessary.
+For more information, see the [Django website](https://docs.djangoproject.com/en/4.1/ref/contrib/admin/).
+
