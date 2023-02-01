@@ -4,14 +4,17 @@
 </div>
 
 # Spotivey
-This is a repository of the web app Spotivey, which was developed in the context of a master's thesis in the Audio Communication and Technology department at the TU Berlin.
+This is a repository of the web app Spotivey, which was developed in the context of a master's thesis in the Audio Communication and Technology department at the TU Berlin. It allows music listening data retrieval from Spotify user accounts within scientific online questionnaire studies. For academic scholars only, fully user-transparent & GDPR-compliant. No retrieval of personal data (name, email, gender, birthdate).
 
+# Why Spotivey - Motivation
+Since music listening nowadays happens increasingly via streaming services such as Spotify, Apple Music or Amazon Music, it would be technically possible to perform research on music actually listened to on basis of 'digital traces' left behind (Greenberg & Rentfrow, 2017), instead of relying on self-reporting in questionnaires, a strategy which suffers from various validity issues (Lepa et al., 2020). In principle, open APIs offered by music service providers could be used for this purpose. For example, by using the Spotify API, it is possible to obtain a wide range of music-related user account information, such as the music tracks most recently listened to, favorite songs or artists, as well as artists followed or playlists created. However, using the Spotify API is normally not possible without technical knowledge of web programming. In addition, purely music-related transaction data without further socio-demographic contextual information is only helpful for academic research to a limited extent. A final problem is that streaming accounts are often used by several people at the same time, which makes it hard to attribute usage data to a specific person.
 
-# First - create a Django Project
+# How to deploy and run Spotify on your own server
+## First - create a Django Project
 First you need to create a Django project. 
 You can use the [tutorial](https://code.visualstudio.com/docs/python/tutorial-django) for this. 
 
-## Change urls.py
+### Change urls.py
 Then ```urlpatterns``` must be adapted and ```include``` imported into ```urls.py```:
 
 ```
@@ -26,7 +29,7 @@ urlpatterns = [
 ]
 ```
 
-## Change settings.py
+### Change settings.py
 You now have to add the following lines to the ```INSTALLED_APPS``` in ```settings.py```.
 
 ```
@@ -41,7 +44,7 @@ Change ```<name-of-your-project>``` to your project name
 
 You can also change other settings that are recommended, see the [documentation](https://docs.djangoproject.com/en/4.1/ref/settings/).
 
-# Load repository into project folder
+## Load repository into project folder
 
 In the next step, load the repository into your project folder and install the necessary packages.
 
@@ -61,14 +64,19 @@ You should now see the Spotivey user interface at ```http://127.0.0.1:8000/login
 Spotivey does not work yet. 
 There are still a few steps missing.
 
-# Developers Account on Spotify
+## Developers Account on Spotify
 
 Before we can use Spotivey and its functions, a Spotify Developer account must have been created.
 To do this, go to the [Spotify for Developers](https://developer.spotify.com/dashboard/) page.
 
 Once you have logged in, create a new app. 
-Now give the app a suitable name (e.g. Spotivey) and a description in which you highlight data protection.
-The description should also be transparent for Spotify.
+Now give the app a suitable name (e.g. “Spotivey”) and a fully transparent description. We recommend the following:
+
+```
+Web app hosted at XXX, allows music listening data retrieval within scientific online questionnaire studies. 
+For academic scholars only, fully user-transparent & GDPR-compliant. 
+No retrieval of personal data (name, email, gender, birthdate).
+```
 
 Afterwards, each developer app has a client ID and a client secret. 
 These are to be kept secret.
@@ -79,7 +87,7 @@ For local use/testing of the app without a server, the localhost (e.g. http://12
 
 <b>Note</b>: Two redirect URLs must always be used
 
-## Create spotify/credentials.py
+### Create spotify/credentials.py
 
 Once you have two REDIRECT_URI, the CLIENT_ID and the CLIENT_SECRET, now create a Credentials.py file and add it to the /spotify folder. 
 Now add
@@ -93,7 +101,7 @@ REDIRECT_URI2 = "YOUR REDIRECT_URI2"
 
 Finally, change in ```./spotify/views.py``` line 148
 
-# Deployment
+## Deployment
 There are a variety of ways to deploy Spotivey to a server.
 First, you should check Django's [deployment checklist](https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/).
 
