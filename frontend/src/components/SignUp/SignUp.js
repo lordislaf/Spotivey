@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from 'react';
-import { Typography, Avatar, TextField, Button } from "@mui/material";
+import { Typography, Avatar, TextField, Button, Alert, AlertTitle, Collapse, IconButton, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function SignUpPage () {
     const [name, setName] = useState('')
@@ -12,6 +13,8 @@ export default function SignUpPage () {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [emailAddress, setEmailAddress] = useState('')
+
+    const [error, setError] = useState(false)
 
     const navigate = useNavigate();
 
@@ -31,22 +34,20 @@ export default function SignUpPage () {
         fetch("/api/create-settings-user", requestOptions)
           .then((response) => {
             if (!response.ok) {
+                console.log(setError(true))
           } else {
-            return response.json();
-          }
-        })
-          .then((data) => {
-          if (!data.error){
             navigate("/login");
           }
-        });
+        })
       }
 
     function Name(){
         setName(vorname + ' ' + nachname)
     }
 
-    useEffect(() => {Name()}, [vorname, nachname])
+    useEffect(() => {
+        Name()
+    }, [vorname, nachname])
     
     function handleUsername(e){
         setUsername(e.target.value)
@@ -74,6 +75,29 @@ export default function SignUpPage () {
             <div className = "login-container-outer">
                 <div className={'login-container'}>
                     <div className={'login-container-inner'}>
+                    <Box sx={{ width: '100%' }}>
+                        <Collapse in={error}>
+                            <Alert 
+                                severity="error"
+                                action={
+                                    <IconButton
+                                      aria-label="close"
+                                      color="inherit"
+                                      size="small"
+                                      onClick={() => {
+                                        setError(false);
+                                      }}
+                                    >
+                                      <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                  }
+                                  sx={{ mb: 2 }}
+                            >
+                                <AlertTitle>Error</AlertTitle>
+                                Incorrect input — <strong>check it out!</strong>
+                            </Alert>
+                        </Collapse>
+                    </Box>
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                             <PersonAddAltOutlinedIcon />
                         </Avatar>
