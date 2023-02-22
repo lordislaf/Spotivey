@@ -556,7 +556,7 @@ export default function Room (props) {
             if (Object.keys(completed).length === pagesNamesArray.length){
               handleSaveCheck()
             }}
-          }>
+          } variant="contained">
           {activeStep !== pagesNamesArray.length - 1 ? <ArrowForwardIcon/> : 'OK'}
         </Button>
       }
