@@ -4,7 +4,7 @@
 </div>
 
 # Spotivey
-This is a repository of the web app Spotivey, which was developed in the context of a master's thesis in the Audio Communication and Technology department at the TU Berlin. It allows music listening data retrieval from Spotify user accounts within scientific online questionnaire studies. For academic scholars only, fully user-transparent & GDPR-compliant. No retrieval of personal data (name, email, gender, birthdate).
+This is a repository of the web app Spotivey, which was developed in the context of a master's thesis submitted at the Audio Communication Group of TU Berlin. It allows music listening data retrieval from Spotify user accounts within scientific online questionnaire studies. For academic scholars only, fully user-transparent & GDPR-compliant. No retrieval of personal data (name, email, gender, birthdate).
 
 # Why Spotivey - Motivation
 Since music listening nowadays happens increasingly via streaming services such as Spotify, Apple Music or Amazon Music, it would be technically possible to perform research on music actually listened to on basis of 'digital traces' left behind (Greenberg & Rentfrow, 2017), instead of relying on self-reporting in questionnaires, a strategy which suffers from various validity issues (Lepa et al., 2020). In principle, open APIs offered by music service providers could be used for this purpose. For example, by using the Spotify API, it is possible to obtain a wide range of music-related user account information, such as the music tracks most recently listened to, favorite songs or artists, as well as artists followed or playlists created. However, using the Spotify API is normally not possible without technical knowledge of web programming. In addition, purely music-related transaction data without further socio-demographic contextual information is only helpful for academic research to a limited extent. A final problem is that streaming accounts are often used by several people at the same time, which makes it hard to attribute usage data to a specific person.
@@ -15,7 +15,7 @@ To address these challenges, the web application Spotivey was developed. It allo
 ![Masterarbeit_Uebersicht_Web-APP2](https://user-images.githubusercontent.com/95614774/216023852-c8596050-834c-477b-ae19-ebd95b160bed.svg)
 *Fig. 1: Individual music usage data can be linked directly with socio-demographic information from a questionnaire*
 
-# How to deploy and run Spotify on your own server
+# How to deploy and run Spotivey on your own server
 ## First - create a Django Project
 First you need to create a Django project. 
 You can use the [tutorial](https://code.visualstudio.com/docs/python/tutorial-django) for this. 
@@ -115,3 +115,10 @@ One possibility we are suggesting here is that the Django app is integrated into
 This also works as a standalone or NGINX variant.
 
 For more information have a look at the following [documentation](https://www.phusionpassenger.com/docs/advanced_guides/install_and_upgrade/apache/install/)
+    
+## Admin-Page
+Spotivey offers an admin area. To access it, an admin must be created using the command ```python ./manage.py createsuperuser```.
+The admin area is accessible under the URL extension ```/admin```.
+There you can give users administrative rights, check the results and delete them if necessary.
+For more information, see the [Django website](https://docs.djangoproject.com/en/4.1/ref/contrib/admin/).
+

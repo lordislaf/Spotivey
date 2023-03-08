@@ -20,7 +20,7 @@ def getResultDict(surveyID):
 
     settings = Settings.objects.filter(umfrageID=surveyID)
 
-    savedTracksSpotify = SavedTracksSpotify.objects.filter(settings__in=settings, confirm=True).values_list('surveyID', 'participant', 'savedTracksData')
+    savedTracksSpotify = SavedTracksSpotify.objects.filter(settings__in=settings, confirm=True).order_by('participant__participant').values_list('surveyID', 'participant', 'savedTracksData')
     participantSavedTracks = Participant.objects.filter(id__in=savedTracksSpotify.values_list('participant'))
 
     rowsSavedTracks = []
