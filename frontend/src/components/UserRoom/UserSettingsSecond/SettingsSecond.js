@@ -9,6 +9,7 @@ import TextFieldMain from "../NewSettingsFirst/SettingsCard/Content/Components/T
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import { goBackToLogin } from '../NewSettingsFirst/Button/BackButtonFunction';
+import { confirmCheck } from "../NewSettingsFirst/SettingsCard/Content/Components/ConfirmCheck";
 
 export default function SettingsPageSecond() {
     const navigate = useNavigate()
@@ -16,8 +17,10 @@ export default function SettingsPageSecond() {
     const surveyID = location.state.surveyID
 
     const [secondSurveyServer, setSecondSurveyServer] = useState('https://student-surveys.ak.tu-berlin.de')
-    const [secondSurveyID, setSecondSurveyID] = useState(location?.state.surveyIDsecond?location.state.surveyIDsecond:'')
+    const [secondSurveyID, setSecondSurveyID] = useState(location?.state.surveyIDsecond ? location.state.surveyIDsecond : '')
     const [secondSurveyLanguage, setSecondSurveyLanguage] = useState('de')
+
+    const [langPass, setLangPass] = useState(location?.state.passLang ? true : false) // for bilingual survey studies
 
     const [changeURLCheck, setChangeURLCheck] = useState(false)
 
@@ -101,10 +104,16 @@ export default function SettingsPageSecond() {
                                                         '2nd Survey ID', 'e.g. 347491', 
                                                         setSecondSurveyID, secondSurveyID, true, changeURLCheck
                                                     )}
-                                                    {TextFieldMain(
-                                                        '2nd Survey Language', '2nd Survey Language', 
-                                                        setSecondSurveyLanguage, secondSurveyLanguage, true, changeURLCheck
-                                                    )}
+                                                    {langPass ? 
+                                                        TextFieldMain(
+                                                            '2nd Survey Language', '2nd Survey Language', 
+                                                            setSecondSurveyLanguage, secondSurveyLanguage, true, true
+                                                        ) : 
+                                                        TextFieldMain(
+                                                            '2nd Survey Language', '2nd Survey Language', 
+                                                            setSecondSurveyLanguage, secondSurveyLanguage, true, changeURLCheck
+                                                        )}
+                                                    {confirmCheck(langPass, setLangPass, true)}
                                                 </div>
                                                 <div className="main-content-card-end-url">
                                                     {changeURLCheck ? 
@@ -125,8 +134,7 @@ export default function SettingsPageSecond() {
                                                                 <button 
                                                                     className="button-change-end-url"
                                                                     onClick={() => {
-                                                                        setEndURL(`${secondSurveyServer}/index.php/
-                                                                        ${secondSurveyID}?lang=${secondSurveyLanguage}`)
+                                                                        setEndURL([secondSurveyServer,'/index.php/',secondSurveyID,'?lang=',secondSurveyLanguage,'&newtest=Y'].join(''))
                                                                         setChangeURLCheck(false)
                                                                     }}
                                                                 >
@@ -177,6 +185,7 @@ export default function SettingsPageSecond() {
                                 secondSurveyID: secondSurveyID,
                                 secondSurveyServer: secondSurveyServer,
                                 secondSurveyLanguage: secondSurveyLanguage,
+                                passLang:langPass,
                                 endURL: endURL,
                                 data: {}
                             }),
@@ -210,6 +219,7 @@ export default function SettingsPageSecond() {
                                 secondSurveyID: secondSurveyID,
                                 secondSurveyServer: secondSurveyServer,
                                 secondSurveyLanguage: secondSurveyLanguage,
+                                passLang:langPass,
                                 endURL: endURL,
                             }),
                         };

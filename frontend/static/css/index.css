@@ -948,7 +948,8 @@ body, a {
 
 .confirm-container {
   margin: 1rem auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }
 
 .confirm-container-checkbox {
@@ -960,10 +961,10 @@ body, a {
 }
 
 .confirm-container-checkbox-outer {
-  padding-left: 20px;
+  /*padding-left: 20px;*/
   display: flex;
   margin: auto;
-  width: 50%;
+  /*width: 50%;*/
 }
 
 .confirm-container-title,
@@ -978,7 +979,6 @@ body, a {
 
 .confirm-container-title {
   font-size: 13px;
-  width: 50%;
 }
 
 .second-survey-container-title {

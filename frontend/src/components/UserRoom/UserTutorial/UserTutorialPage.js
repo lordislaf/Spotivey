@@ -229,8 +229,8 @@ export default function UserTutorialPage(props) {
                     (but without a problematic 'break' in the user experience). 
                     This technical trick allows respondents to implement music data retrieval at any point in an online survey, 
                     rather than just at the end. 
-                    It also allows for reference to individually retrieved data in questionnaire sections that 
-                    follow the music data retrieval. 
+                    It also allows referencing individually retrieved data in questionnaire 
+                    sections that follow the music data retrieval.
                     A unique respondent ID is passed from Limesurvey to Spotivey and back to Limesurvey via a URL parameter, 
                     so that each music transaction record can later be reliably linked to both questionnaire records. 
                     A permanently programmed data protection notice before the music data retrieval also protects the 
@@ -240,7 +240,7 @@ export default function UserTutorialPage(props) {
                     Optionally, the researcher can also set that the test persons must explicitly confirm all individual 
                     music transaction data records (e.g. individual titles, artists or playlists) directly after retrieval 
                     with regard to a specific question that can be formulated freely. 
-                    In this way, the problem of multiple profile use mentioned above can be addressed. 
+                    In this way, the problem of multiple profile use can be addressed.
                     In general, Spotivey has been programmed in such a way that the few personal data of the user account 
                     (in the case of Spotify: name, email address and year of birth) 
                     are not retrieved and linked to the questionnaire data. 
@@ -272,12 +272,12 @@ export default function UserTutorialPage(props) {
                     via the study name and the Limesurvey questionnaire ID. 
                     This initial questionnaire should be designed in such a way that participants are informed on 
                     the start page that the study will retrieve survey data as well as music data from the music 
-                    streaming user account and, in accordance with the European Data Protection Regulation, 
+                    streaming user account and, in accordance with the European General Data Protection Regulation, 
                     also include the necessary general data protection notice on the purposes and storage of the data. 
                     Furthermore, the following link must be set in Limesurvey as the end URL of the questionnaire:
                   </h3>
                   <h3 class='settings-overview-text'>
-                    https//spotiveys.users.ak.tu-berlin.de/?surveyID=&#123;SID&#125;&participant=&#123;SAVEDID&#125;&lang=&#123;LANG&#125;
+                    https://spotivey.users.ak.tu-berlin.de/?surveyID=&#123;SID&#125;&participant=&#123;SAVEDID&#125;&lang=&#123;LANG&#125;
                   </h3>
                   <h3 class='settings-overview-text'>
                     This ensures that the Spotivey App is automatically started after the input questionnaire 
@@ -366,9 +366,9 @@ export default function UserTutorialPage(props) {
                     </h1>
                   </div>
                   <h3 class='settings-overview-text'>
-                    If the respondents are to be presented with a follow-up questionnaire after the music data retrieval, 
-                    which may even ask questions related to the retrieved music data, 
-                    researchers can optionally configure this in the FollowUp-Settings of Spotivey. 
+                    If researchers want respondents to be presented with a follow-up questionnaire 
+                    after the music data retrieval including even specific questions related to the 
+                    retrieved music data, they may optionally configure this in the FollowUp-Settings of Spotivey.
                     All they have to do is enter the start URL of the follow-up questionnaire. 
                     Spotivey then forwards each respondent to this URL after retrieving the music data. 
                     In this way, for example, the use of a commercial panel provider for respondent recruitment 
@@ -382,21 +382,21 @@ export default function UserTutorialPage(props) {
                     follow-up questions for the respondents.
                   </h3>
                   <h3 class='settings-overview-text'>
-                    If there is a desire to directly ask questions about the retrieved music data (such as titles or artists)
-                    in the follow-up questionnaire, Spotivey supports this with additional functions: 
+                    If researchers want to directly ask questions about the retrieved music data (such as titles or artists) 
+                    in the follow-up questionnaire, Spotivey supports this with additional functions:
                     On the one hand, the researcher can set in Spotivey how many and which types of music 
                     transaction data records should be directly included in the follow-up questionnaire. 
                     These are then also forwarded to Limesurvey as parameters via the URL, so that this 
                     information can be accessed in the form of variables when programming the follow-up questionnaire.
                   </h3>
                   <h3 class='settings-overview-text'>
-                    In order to make this not-so-simple creation of questions with reference to the retrieved music 
-                    data as simple as possible for those conducting the study, 
+                    In order to ease this not-so-simple creation of questions with reference to the retrieved music, 
                     Spotivey also creates automatically pre-programmed LimeSurvey questions on request, 
-                    either of the single question type or of the matrix question type, which directly read 
-                    out the variable contents configured for transmission and write them into the question text, 
-                    either in the form of text modules, or even in the form of a small web player that makes the 
-                    respective titles playable again and visually presents the cover of the respective music release. 
+                    either of the single question type or of the matrix question type.  
+                    These then directly read out the variable contents configured for transmission and write 
+                    them into the question text, either in the form of text modules, or even in the form of a 
+                    small web player that makes the respective titles playable again and visually presents the 
+                    cover of the respective music release.
                     These prefabricated questions can then be exported from Spotivey in the form of an XML question group file, 
                     imported into the LimeSurvey follow-up questionnaire and then adapted, 
                     redesigned and extended with regard to the specific needs of the respective survey (see fig. 4 right).
@@ -474,14 +474,15 @@ export default function UserTutorialPage(props) {
                     </h1>
                   </div>
                   <h3 class='settings-overview-text'>
-                    In order to avoid unnecessary dropouts, we advise participants in online survey studies that use 
-                    Spotivey to be made aware during the recruitment process on websites or by e-mail that a personal 
-                    Spotify account is a mandatory prerequisite for the survey and that, in addition to the survey, 
-                    the study also includes the retrieval of certain information from this account. 
+                    In order to avoid unnecessary dropouts, we strongly advise researcher to raise awareness 
+                    of participants in online survey studies employing  Spotivey already during the recruitment 
+                    process that a personal Spotify account will be a mandatory prerequisite for study participation 
+                    and that, in addition to the survey, the study will also include retrieval of certain information 
+                    from the participants personal Spotify account.
                     Likewise, the same facts should be pointed out on the entry page of the questionnaire. 
                     The explanations within the legally required data protection statement on data collection, 
-                    data storage and data use, which requires consent, should also explicitly cover the music 
-                    data to be retrieved. 
+                    data storage and data use that are displayed on the questionnaire landing page should also 
+                    explicitly cover the music data to be retrieved.
                     In addition, when programming the questionnaire, a short text note should be 
                     included at the end of the questionnaire, which makes the transition from the initial 
                     questionnaire to Spotivey as 'seamless' as possible for the respondents 
@@ -513,9 +514,10 @@ export default function UserTutorialPage(props) {
                     The respondents are then asked to authorise the process using the Spotify login. 
                     The data retrieval from the Spotify account then begins, which typically takes a few 
                     seconds and is therefore visualised with a small animation and accompanied by the request 
-                    not to close the browser window (see Fig. 7). At this moment, only the data is requested from Spotify 
-                    to which consent was given in the course of the data protection notice; 
-                    in particular, no personal data from the account is saved, although this would be technically possible.
+                    not to close the browser window (see Fig. 7). 
+                    At this moment, only the data to which consent was explicitly given in the course of the 
+                    data protection notice is retrieved; in particular, no personal data from the account is saved, 
+                    although this would be technically possible.
                   </h3>
                   <figure class='overview-img'>
                     <img src="../../../static/images/imagesTutorial/Abb10.png" width='100%' />
@@ -531,8 +533,9 @@ export default function UserTutorialPage(props) {
                     that one has actually listened to oneself. In this way, the problem of the often occurring 
                     multiple use of Spotify accounts by several people can be solved. Records rejected during 
                     this process are now immediately deleted from the Spotivey database again, so that the researcher(s) 
-                    do not have access to them at any time. This seemed an important measure, as otherwise data from 
-                    third parties who may not agree with the analysis would have ended up in the hands of the researchers.
+                    do not have access to them at any time. 
+                    This seemed an important measure, as otherwise data from third parties who may have not agreed 
+                    with the analysis would have ended up in the hands of the researchers.
                   </h3>
                   <h3 class='settings-overview-text'>
                     After this confirmation dialogue, either the survey is over and a notice appears that the 
@@ -624,7 +627,7 @@ export default function UserTutorialPage(props) {
                   genau erfasst, analysiert und gespeichert werden. Der/die Forschende kann optional zusätzlich
                   einstellen, dass Proband*innen alle einzelnen Musiktransaktionsdatensätze (etwa: einzelne Titel,
                   Künstler*innen oder Playlists) direkt nach dem Abruf explizit im Hinblick auf eine bestimmte frei formulierbare
-                  Frage bestätigen müssen. Auf diese Weise kann etwa das weiter oben angesprochene Profilmehrfachnutzungsproblem
+                  Frage bestätigen müssen. Auf diese Weise kann etwa ein typisches Profilmehrfachnutzungsproblem
                   adressiert werden. Generell ist Spotivey ferner so programmiert worden,
                   dass die wenigen personenbezogenen Daten des Nutzeraccounts (im Falle von Spotify: Name,
                   Emailadresse und Geburtsjahr) keinesfalls abgerufen und mit den Fragebogendaten verknüpft werden.
@@ -660,7 +663,7 @@ export default function UserTutorialPage(props) {
                   Ferner muss der folgende Link in Limesurvey als End-URL des Fragebogens eingestellt werden:
                 </h3>
                 <h3 class='settings-overview-text'>
-                  https//spotiveys.users.ak.tu-berlin.de/?surveyID=&#123;SID&#125;&participant=&#123;SAVEDID&#125;&lang=&#123;LANG&#125;
+                  https://spotivey.users.ak.tu-berlin.de/?surveyID=&#123;SID&#125;&participant=&#123;SAVEDID&#125;&lang=&#123;LANG&#125;
                 </h3>
                 <h3 class='settings-overview-text'>
                   Dies sorgt dafür, dass nach Ausfüllen des Eingangsfragebogens automatisch die Spotivey App gestartet

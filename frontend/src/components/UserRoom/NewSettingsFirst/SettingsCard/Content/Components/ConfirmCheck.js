@@ -1,19 +1,26 @@
 import * as React from "react";
 
 export function confirmCheck(
-    checkedYes, setCheckedYes
+    checkedYes, setCheckedYes, passParams
 ) {
     const handleChange = () => {
         setCheckedYes(!checkedYes);
     };
 
+    const confirmStyle = passParams ? {margin:"2rem auto"} : null
+
     return(
         <React.Fragment>
-            <div className={"confirm-container"}>
+            <div className={"confirm-container"} style={confirmStyle}>
+                {passParams ? 
+                <h5 className={"confirm-container-title"}>
+                    Would you like to pass the language code for a bilingual questionnaire? <br></br>
+                    <u>Note:</u> The language code is automatically passed to the follow-up questionnaire via the URL
+                </h5> :
                 <h5 className={"confirm-container-title"}>
                     Would you like to receive confirmation of the results from the test persons? <br></br>
                     <u>Note:</u> If several people share an account, this setting is helpful to compensate this problem.
-                </h5>
+                </h5>}
                 <div className={"confirm-container-checkbox-outer"}>
                     <div className={"confirm-container-checkbox"}>
                         <label className={"confirm-container-title"}>

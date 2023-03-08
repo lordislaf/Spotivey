@@ -29,6 +29,7 @@ export default function Room (props) {
  
   const [dataFieldsCheck, setDataFieldsCheck] = useState(null)
   const [selectedOption, setSelectedOption] = useState(null)
+  const [passLang, setPassLang] = useState(null)
 
   const [questionTypeCheck, setQuestionTypeCheck] = useState(null)
 
@@ -223,6 +224,7 @@ export default function Room (props) {
                 setQuestionTypeCheck(data.data[0].secondEndUrl !== '' ? data.data[0].questionTypeCheck : null)
                 setDataFieldsCheck(data.data[0].secondEndUrl !== '' ? data.data[0].dataFieldsCheck : null)
                 setSelectedOption(data.data[0].secondEndUrl !== '' ? data.data[0].selectedOption : null)
+                setPassLang(data.data[0].secondEndUrl !== '' ? data.data[0].passLang : false)
 
                 setGetSettingsCheck(true)
             }
@@ -556,7 +558,7 @@ export default function Room (props) {
             if (Object.keys(completed).length === pagesNamesArray.length){
               handleSaveCheck()
             }}
-          }>
+          } variant="contained">
           {activeStep !== pagesNamesArray.length - 1 ? <ArrowForwardIcon/> : 'OK'}
         </Button>
       }
@@ -607,10 +609,14 @@ export default function Room (props) {
 
     if (endURLSecondSurvey) {
       dataAll = [savedTracks, topTracks, recentlyTracks , topArtists, followedArtists, currentPlaylists]
-      let paramsURL = getGetParams(questionTypeCheck, selectedOption, dataFieldsCheck, idName, idTracks, idArtists, idPlaylists, 
-        dataAll, endURLSecondSurvey, checkArray)
+      let paramsURL = selectedOption ? getGetParams(questionTypeCheck, selectedOption, dataFieldsCheck, idName, idTracks, idArtists, idPlaylists, 
+        dataAll, endURLSecondSurvey, checkArray) : null
         
-      let win = window.open(endURLSecondSurvey + paramsURL + '&partID=' + props.participant + "&newtest=Y", '_blank');
+      let passURL = !passLang ? 
+        [endURLSecondSurvey,paramsURL,'&partID=',props.participant].join('') :
+        [endURLSecondSurvey,paramsURL,'&partID=',props.participant,'&lang=',props.language].join('')
+      
+      let win = window.open(passURL, '_blank')
       win.focus();
     }
     navigate("/end-room/" + props.language);
@@ -717,8 +723,12 @@ export default function Room (props) {
       dataAll = [savedTracks, recentlyTracks, topTracks, topArtists, followedArtists, currentPlaylists]
       let paramsURL = getGetParams(questionTypeCheck, selectedOption, dataFieldsCheck, idName, idTracks, idArtists, idPlaylists, 
         dataAll, endURLSecondSurvey)
-        
-      let win = window.open(endURLSecondSurvey + paramsURL + '&partID=' + props.participant, '_blank');
+      let passURL = !passLang ? 
+        [endURLSecondSurvey,paramsURL,'&partID=',props.participant].join('') :
+        [endURLSecondSurvey,paramsURL,'&partID=',props.participant,'&lang={',props.language, '}'].join('')
+      
+      let win = window.open(passURL, '_blank')
+      console.log(passLang, passURL)
       win.focus();
     } else {
         navigate("/end-room/" + props.language);

@@ -66,7 +66,7 @@ export default function LoginPage () {
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                  Sign in
+                  Login
                 </Typography>
                 <div className={'login-container-textfield-container'}>
                   <TextField

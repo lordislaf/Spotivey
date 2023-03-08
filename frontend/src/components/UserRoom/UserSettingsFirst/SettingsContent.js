@@ -123,7 +123,7 @@ export default function SettingsContent(props) {
     };
 
     function getEndUrlSurvey() {
-        const url = 'https//spotiveys.users.ak.tu-berlin.de/?surveyID={SID}&participant={SAVEDID}&lang={LANG}'
+        const url = 'https://spotivey.users.ak.tu-berlin.de/?surveyID={SID}&participant={SAVEDID}&lang={LANG}'
         navigator.clipboard.writeText(url)
         handleTooltipOpen()
     }

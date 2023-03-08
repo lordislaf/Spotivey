@@ -76,19 +76,19 @@ class saveToCSVFileView(APIView):
             settingsObject = Settings.objects.filter(umfrageID=surveyID)
 
             savedTracks = SavedTracksSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
-                'savedTracksData', 'participant')
+                'savedTracksData', 'participant').order_by('participant__participant').values()
             topTracks = TopTracksSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
-                'topTracksData', 'participant')
+                'topTracksData', 'participant').order_by('participant__participant').values()
             recentlyTracks = RecentlyTracksSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
-                'recentlyTracksData', 'participant')
+                'recentlyTracksData', 'participant').order_by('participant__participant').values()
             topArtists = TopArtistsSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
-                'topArtistsData', 'participant')
+                'topArtistsData', 'participant').order_by('participant__participant').values()
             followedArtists = FollowedArtistsSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
-                'followedArtistsData', 'participant')
+                'followedArtistsData', 'participant').order_by('participant__participant').values()
             currentPlaylists = CurrentPlaylistsSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
-                'currentPlaylistsData', 'participant')
+                'currentPlaylistsData', 'participant').order_by('participant__participant').values()
             usersProfile = UsersProfileSpotify.objects.filter(settings__in=settingsObject).values_list(
-                'usersProfileData', 'participant')
+                'usersProfileData', 'participant').order_by('participant__participant').values()
             allDataArray = [savedTracks, topTracks, recentlyTracks, topArtists, 
                 followedArtists, currentPlaylists, usersProfile]
 
@@ -113,32 +113,32 @@ class saveToCSVFileView(APIView):
                     for j in range(len(data)):
                         if index == 0:
                             if countCheck == j:
-                                countCheck+=int(SavedTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(SavedTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(SavedTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(SavedTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                         elif index == 1:
                             if countCheck == j:
-                                countCheck+=int(TopTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(TopTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(TopTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(TopTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                         elif index == 2:
                             if countCheck == j:
-                                countCheck+=int(RecentlyTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(RecentlyTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(RecentlyTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(RecentlyTracksSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                         elif index == 3:
                             if countCheck == j:
-                                countCheck+=int(TopArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(TopArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(TopArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(TopArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                         elif index == 4:
                             if countCheck == j:
-                                countCheck+=int(FollowedArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(FollowedArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(FollowedArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(FollowedArtistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                         elif index == 5:
                             if countCheck == j:
-                                countCheck+=int(CurrentPlaylistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(CurrentPlaylistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(CurrentPlaylistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(CurrentPlaylistsSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                         else:
                             if countCheck == j:
-                                countCheck+=int(UsersProfileSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
-                                countDataParticipant[index].append(UsersProfileSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j][1]).values_list('participant')[0][0]).count())
+                                countCheck+=int(UsersProfileSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
+                                countDataParticipant[index].append(UsersProfileSpotify.objects.filter(surveyID=surveyID, confirm=True,participant__participant=Participant.objects.filter(id=data[j].get('participant_id')).values_list('participant')[0][0]).count())
                 else:
                     countDataParticipant[index] = [0] * maxParticipantCount
                     
@@ -161,53 +161,65 @@ class saveToCSVFileView(APIView):
                             count[indexPart] += 1
                             if len(allDataArray[indexPart]) > 0:
                                 if indexPart == laengeIndexMax[indexCount]:
-                                    rowsParticipant.append(Participant.objects.filter(id=allDataArray[indexPart][count[indexPart]][1]).values_list('participant')[0][0])
+                                    rowsParticipant.append(Participant.objects.filter(id=allDataArray[indexPart][count[indexPart]].get('participant_id')).values_list('participant')[0][0])
                                     rowsParticipantNo.append(index)
                                 if not count[indexPart] > len(allDataArray[indexPart]):
                                     if indexPart < 3:
-                                        tracksISRC[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('isrc'))
-                                        tracksSpotifyName[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('track_name'))
-                                        tracksSpotifyID[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('spotify_id'))
-                                        tracksSpotifyArtist[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('spotify_artist_string_ohne_komma'))
-                                        tracksCover[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('image_url'))
-                                        tracksAlbumLabel[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('albumLabel'))
-                                        tracksAlbumName[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('albumName'))
-                                        tracksReleaseDate[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('releaseDate'))
-                                        tracksAlbumType[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('album_type'))
-                                        tracksDuration_ms[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('duration_ms'))
-                                        tracksAddedAt[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('added_at'))
-                                        tracksPopularity[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('popularity'))
+                                        if indexPart == 0:
+                                            dataString = 'savedTracksData'
+                                        elif indexPart == 1:
+                                            dataString = 'topTracksData'
+                                        else:
+                                            dataString = 'recentlyTracksData'
+                                        tracksISRC[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('isrc'))
+                                        tracksSpotifyName[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('track_name'))
+                                        tracksSpotifyID[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('spotify_id'))
+                                        tracksSpotifyArtist[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('spotify_artist_string_ohne_komma'))
+                                        tracksCover[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('image_url'))
+                                        tracksAlbumLabel[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('albumLabel'))
+                                        tracksAlbumName[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('albumName'))
+                                        tracksReleaseDate[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('releaseDate'))
+                                        tracksAlbumType[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('album_type'))
+                                        tracksDuration_ms[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('duration_ms'))
+                                        tracksAddedAt[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('added_at'))
+                                        tracksPopularity[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('popularity'))
 
-                                        tracksAcousticness[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('acousticness'))
-                                        tracksDanceability[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('danceability'))
-                                        tracksEnergy[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('energy'))
-                                        tracksKey[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('key'))
-                                        tracksLoudness[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('loudness'))
-                                        tracksSpeechiness[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('speechiness'))
-                                        tracksInstrumentalness[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('instrumentalness'))
-                                        tracksLiveness[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('liveness'))
-                                        tracksValence[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('valence'))
-                                        tracksTempo[indexPart].append(allDataArray[indexPart][count[indexPart]][0].get('dataAudioFeatures').get('tempo'))
+                                        tracksAcousticness[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('acousticness'))
+                                        tracksDanceability[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('danceability'))
+                                        tracksEnergy[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('energy'))
+                                        tracksKey[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('key'))
+                                        tracksLoudness[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('loudness'))
+                                        tracksSpeechiness[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('speechiness'))
+                                        tracksInstrumentalness[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('instrumentalness'))
+                                        tracksLiveness[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('liveness'))
+                                        tracksValence[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('valence'))
+                                        tracksTempo[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('tempo'))
                                     elif indexPart > 2 and indexPart < 5:
-                                        artistsType[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('type'))
-                                        artistsPopularity[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('popularity'))
-                                        artistsFollowers[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('followers').get('total'))
-                                        artistsGenre[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('genre_string'))
-                                        artistsCover[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('image_url'))
-                                        artistsName[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('artist'))
-                                        artistsSpotifyID[indexPart-3].append(allDataArray[indexPart][count[indexPart]][0].get('id'))
+                                        if indexPart == 3:
+                                            dataString = 'topArtistsData'
+                                        else:
+                                            dataString = 'followedArtistsData'
+                                        artistsType[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('type'))
+                                        artistsPopularity[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('popularity'))
+                                        artistsFollowers[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('followers').get('total'))
+                                        artistsGenre[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('genre_string'))
+                                        artistsCover[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('image_url'))
+                                        artistsName[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('artist'))
+                                        artistsSpotifyID[indexPart-3].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('id'))
                                     elif indexPart == 5:
-                                        playlistsID.append(allDataArray[indexPart][count[indexPart]][0].get('id'))
-                                        playlistsCollaborative.append(allDataArray[indexPart][count[indexPart]][0].get('collaborative'))
-                                        playlistsName.append(allDataArray[indexPart][count[indexPart]][0].get('name'))
-                                        playlistsOwner.append(allDataArray[indexPart][count[indexPart]][0].get('owner'))
-                                        playlistsPublic.append(allDataArray[indexPart][count[indexPart]][0].get('public'))
-                                        playlistsTracksTotal.append(allDataArray[indexPart][count[indexPart]][0].get('tracks_total'))
-                                        playlistsCover.append(allDataArray[indexPart][count[indexPart]][0].get('playlists_cover'))
+                                        dataString='currentPlaylistsData'
+                                        playlistsID.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('id'))
+                                        playlistsCollaborative.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('collaborative'))
+                                        playlistsName.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('name'))
+                                        playlistsOwner.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('owner'))
+                                        playlistsPublic.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('public'))
+                                        playlistsTracksTotal.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('tracks_total'))
+                                        playlistsCover.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('playlists_cover'))
                                     else:
-                                        userCountry.append(allDataArray[indexPart][count[indexPart]][0].get('country'))
-                                        userFollowers.append(allDataArray[indexPart][count[indexPart]][0].get('followers'))
-                                        userProduct.append(allDataArray[indexPart][count[indexPart]][0].get('product'))
+                                        dataString = 'usersProfileData'
+                                        userCountry.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('country'))
+                                        userFollowers.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('followers'))
+                                        userProduct.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('product'))
                     if indexPart < 3:
                         tracksISRC[indexPart] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
                         tracksSpotifyName[indexPart] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
@@ -792,17 +804,19 @@ class GetSettingsSecondSurvey(APIView):
                 for i in range (len(settingslist)):
                     settingslistsecond = np.array(SettingsSecondSurvey.objects.filter(
                         settings__in=settings).values_list('settings','secondSurveyID', 'secondSurveyServer',
-                        'secondSurveyLanguage', 'secondSurveyEndURL'))
+                        'secondSurveyLanguage', 'secondSurveyEndURL', 'passLang'))
                     if not checkID[i]:
                         umfrageIDTemp = ''
                         secondSurveyServer = ''
                         secondSurveyLanguage = ''
                         umfrageEndUrlTemp = ''
+                        passLang = "False"
                     else:
                         umfrageIDTemp = settingslistsecond[indexSecondSetting][1]
                         secondSurveyServer = settingslistsecond[indexSecondSetting][2]
                         secondSurveyLanguage = settingslistsecond[indexSecondSetting][3]
                         umfrageEndUrlTemp = settingslistsecond[indexSecondSetting][4]
+                        passLang = settingslistsecond[indexSecondSetting][5]
                         indexSecondSetting += 1
 
                     dataCheckProfile = [
@@ -819,6 +833,7 @@ class GetSettingsSecondSurvey(APIView):
                         'secondSurveyLanguage': secondSurveyLanguage,
                         'umfrageID': settingslist[i][2],
                         'endURL': umfrageEndUrlTemp,
+                        'passLang': eval(passLang),
                         'onlyProfile': True not in dataCheckProfile  # if only get User's profile is checked in retrieval-settings
                     })
 
@@ -944,13 +959,16 @@ class getSettingsFromIDView(APIView):
             if len(settings) > 0:
                 settingsTwo = SettingsSecondSurvey.objects.filter(settings__in=settings)
                 settingsTwoDataEndURL = np.array(settingsTwo.values_list('secondSurveyEndURL'))
+                settingsPassLang = np.array(settingsTwo.values_list('passLang'))
                 settingsTwoData = np.array(settingsTwo.values_list('secondSurveyData'))
                 if len(settingsTwoDataEndURL)==0 :
+                    settingsPassLang = None
                     secondEndUrl = None
                     selectedOption = None
                     questionTypeCheck = None
                     dataFieldsCheck = None
                 else:
+                    passLang = settingsPassLang[0][0]
                     secondEndUrl = settingsTwoDataEndURL[0][0]
                     if settingsTwoData[0][0] is not None:
                         selectedOption = settingsTwoData[0][0].get('selectedOption')
@@ -1059,6 +1077,7 @@ class getSettingsFromIDView(APIView):
                     'selectedOption': selectedOption,
                     'questionTypeCheck': questionTypeCheck,
                     'dataFieldsCheck': dataFieldsCheck,
+                    'passLang':passLang,
                 }]
 
                 return Response({'data': rows, 'json:': settingslistdata}, status=status.HTTP_200_OK)
@@ -1092,6 +1111,7 @@ class CreateSettingsSecondSurvey(APIView):
         secondSurveyServer = request.data.get('secondSurveyServer')
         endURL = request.data.get('endURL')
         secondSurveyLanguage = request.data.get('secondSurveyLanguage')
+        passLang = request.data.get('passLang')
         data = request.data.get('data')
 
         user = User.objects.filter(username=username)
@@ -1104,7 +1124,7 @@ class CreateSettingsSecondSurvey(APIView):
                 settingsOne = settingsFilter[0]
                 settingsOne.save()
             settingsTwo = SettingsSecondSurvey(settings=settingsOne, secondSurveyID=secondSurveyID,
-                secondSurveyServer=secondSurveyServer, secondSurveyLanguage=secondSurveyLanguage, secondSurveyEndURL=endURL)
+                secondSurveyServer=secondSurveyServer, secondSurveyLanguage=secondSurveyLanguage, secondSurveyEndURL=endURL, passLang=passLang)
             settingsTwo.save()
             settingsTwo.user.add(user.values()[0].get('id'))
 
@@ -1151,6 +1171,7 @@ class UpdateSettingsSecondSurveyEndURL(APIView):
         secondSurveyServer = request.data.get('secondSurveyServer')
         endURL = request.data.get('endURL')
         secondSurveyLanguage = request.data.get('secondSurveyLanguage')
+        passLang = request.data.get('passLang')
 
         user = User.objects.filter(username=username)
 
@@ -1168,6 +1189,7 @@ class UpdateSettingsSecondSurveyEndURL(APIView):
             settingsTwo.update(secondSurveyServer=secondSurveyServer)
             settingsTwo.update(secondSurveyLanguage=secondSurveyLanguage)
             settingsTwo.update(secondSurveyEndURL=endURL)
+            settingsTwo.update(passLang=passLang)
 
             return Response({'msg': 'Settings updated'}, status=status.HTTP_200_OK)
 

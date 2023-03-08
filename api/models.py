@@ -16,7 +16,7 @@ def generate_unique_code():
 
 class Room(models.Model):
     code = models.CharField(max_length=8, default=generate_unique_code, unique=True)
-    host = models.CharField(max_length=50, unique=True)
+    host = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     surveyID = models.CharField(max_length=20, default='')
     participant = models.CharField(max_length=20, default='')
@@ -24,7 +24,7 @@ class Room(models.Model):
 
 class UserCode(models.Model):
     code = models.CharField(max_length=8, default=generate_unique_code, unique=True)
-    host = models.CharField(max_length=50, unique=True)
+    host = models.CharField(max_length=50)
     user = models.ManyToManyField(User, default='')
 
 
@@ -62,3 +62,4 @@ class SettingsSecondSurvey(models.Model):
     secondSurveyOther = models.JSONField(null=True, blank=True)
     secondSurveyData = models.JSONField(null=True, blank=True)
     secondSurveyEndURL = models.URLField(max_length=200, default='', blank=True)
+    passLang = models.BooleanField(default=False)

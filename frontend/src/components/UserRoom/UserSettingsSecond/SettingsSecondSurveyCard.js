@@ -19,6 +19,7 @@ export default function SettingsSecondSurveyCard(props) {
             fetch("/api/get-settings-second-survey" + "?username=" + props.username).then(response => response.json())
             .then((data) => {
                 if (!data.error){
+                    console.log(data.data)
                     setSettingsRows(data.data)
                 }
             });
@@ -73,7 +74,8 @@ export default function SettingsSecondSurveyCard(props) {
                             surveyIDsecond: selectedRowSettings[0].umfrageIDsecond !== '' ? 
                                 selectedRowSettings[0].umfrageIDsecond : 
                                 null,
-                            endURL: selectedRowSettings[0].endURL
+                            endURL: selectedRowSettings[0].endURL,
+                            passLang: selectedRowSettings[0].passLang,
                         }
                     })
                 }}
@@ -142,7 +144,11 @@ export default function SettingsSecondSurveyCard(props) {
             <h3 class='settings-overview-text'>
                 In order to delete your follow-up setting, press the button <i>Delete Follow-Up Settings</i>after 
                 checking a checkbox.
-                To change the setting, delete the setting first.
+            </h3>
+            <h3 class='settings-overview-text'>
+                Use <i>Generate Question Files</i> to specify how many and which results you want to give to a possible follow-up questionnaire. <br></br>
+                Note: Without this information, Spotivey cannot properly forward to a follow-up questionnaire. <br></br>
+                Finally, the configured question group can be exported using a button.
             </h3>
             <div className="settings-table-button-container">
                 <div className="settings-table-button-container-inner">

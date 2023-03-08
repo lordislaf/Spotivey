@@ -201,7 +201,7 @@ export default function ResultContent(props) {
                             {type === 'Playlists' ? <th>Title</th> : null}
                             {type === 'Tracks' ? <th>Artists Name</th> : null}
                             <th>Spotify ID</th>
-                            {type === 'Tracks' ? <th>ISCR Number</th> : null}
+                            {type === 'Tracks' ? <th>ISRC Number</th> : null}
                             {type === 'Artists' ? <th>Type</th> : null}
                             {type === 'Artists' ? <th>Popularity</th> : null}
                             {type === 'Artists' ? <th>Followers Total</th> : null}
