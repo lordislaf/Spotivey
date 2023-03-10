@@ -1,8 +1,8 @@
 ![SpotiveyLogo2_Schrift](https://user-images.githubusercontent.com/95614774/224396409-3550cd2c-9f98-4b0b-aac5-be93f7406077.svg)
 <!--- ![TU Berlin Logo](https://upload.wikimedia.org/wikipedia/commons/2/2e/Logo_der_Technischen_Universit%C3%A4t_Berlin.svg)
-![AKT-Logo](https://www.static.tu.berlin/fileadmin/www/_processed_/2/1/csm_logo_grau-schwarz_03df69556e.png)--->
+![AKT-Logo](https://www.static.tu.berlin/fileadmin/www/_processed_/2/1/csm_logo_grau-schwarz_03df69556e.png)
 
-# Spotivey
+# Spotivey--->
 This is a repository of the web app Spotivey, which was developed in the context of a master's thesis submitted at the Audio Communication Group of TU Berlin. It allows music listening data retrieval from Spotify user accounts within scientific online questionnaire studies. For academic scholars only, fully user-transparent & GDPR-compliant. No retrieval of personal data (name, email, gender, birthdate).
 
 # Why Spotivey - Motivation
