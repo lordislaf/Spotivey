@@ -265,7 +265,7 @@ export default function SettingsPage(props) {
                           class={mySwiper?.activeIndex===0 ? 'list-new-settings-item-bold' : 'list-new-settings-item-regular'}
                           onClick={() => handleSettingsButtonPressed(0)}
                         >
-                          main Settings
+                          Main Settings
                         </a>
                         <Collapse in={openSettingsListItem[0]} timeout="auto" unmountOnExit>
                           <ul className={"list-new-settings-collapse-inner"}>

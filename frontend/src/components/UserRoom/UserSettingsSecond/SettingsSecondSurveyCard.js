@@ -82,7 +82,7 @@ export default function SettingsSecondSurveyCard(props) {
                 disabled={selectedRowSettings.length === 1 && 
                     !selectedRowSettings[0].onlyProfile ? false : true}
             >
-                {selectedRowSettings.length === 1 ? selectedRowSettings[0]?.umfrageIDsecond === '' ? 'Edit Follow-Up Settings' : 'Modify Follow-Up URL':'Edit Follow-Up Settings'}
+                {selectedRowSettings.length === 1 ? selectedRowSettings[0]?.endURL === '' ? 'Edit Follow-Up Settings' : 'Modify Follow-Up URL':'Edit Follow-Up Settings'}
             </Button>
         )
     }
@@ -117,7 +117,7 @@ export default function SettingsSecondSurveyCard(props) {
             <Button 
                 startIcon={<GetAppIcon/>}
                 disabled={selectedRowSettings.length === 1 && 
-                    selectedRowSettings[0].umfrageIDsecond !== '' &&
+                    selectedRowSettings[0].endURL !== '' &&
                     !selectedRowSettings[0].onlyProfile ? false : true}
                 onClick={()=>{
                     navigate('/user/settings2/new2', {

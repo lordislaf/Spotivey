@@ -257,7 +257,7 @@ export default function getXMLOutputSingleQuestion(
                         {data: '               <gid><![CDATA[1]]></gid>'},
                         {data: '               <type><![CDATA[S]]></type>'},
                         {data: `               <title><![CDATA[Q${idNumber}]]></title>`},
-                        {data: `               <question><![CDATA[]]></question>`},
+                        {data: `               <question><![CDATA[${questionStart}) ${CodeSnippetString}]]></question>`},
                         {data: '               <preg/>'},
                         {data: '               <help/>'},
                         {data: '               <other><![CDATA[N]]></other>'},

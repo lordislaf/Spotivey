@@ -18,7 +18,6 @@ export default function SettingsPageSecond() {
 
     const [secondSurveyServer, setSecondSurveyServer] = useState('https://student-surveys.ak.tu-berlin.de')
     const [secondSurveyID, setSecondSurveyID] = useState(location?.state.surveyIDsecond ? location.state.surveyIDsecond : '')
-    const [secondSurveyLanguage, setSecondSurveyLanguage] = useState('de')
 
     const [langPass, setLangPass] = useState(location?.state.passLang ? true : false) // for bilingual survey studies
 
@@ -27,21 +26,21 @@ export default function SettingsPageSecond() {
     const [endURL, setEndURL] = useState(
         location?.state.endURL ?
             location.state.endURL : 
-            'https://student-surveys.ak.tu-berlin.de/index.php/'+location?.state.surveyIDsecond+'?lang=de&newtest=Y'
+            'https://student-surveys.ak.tu-berlin.de/index.php/'+location?.state.surveyIDsecond
     )
 
     const [username, setUsername] = useState('')
 
     const url = useRef(location.state.surveyIDsecond ?
-        'https://student-surveys.ak.tu-berlin.de/index.php/'+location.state.surveyIDsecond+'?lang=de&newtest=Y' :
-        'https://student-surveys.ak.tu-berlin.de/index.php/?lang=de&newtest=Y'
+        'https://student-surveys.ak.tu-berlin.de/index.php/'+location.state.surveyIDsecond :
+        'https://student-surveys.ak.tu-berlin.de/index.php/'
         )
 
     useEffect(() => {
-        if (url.current != secondSurveyServer+'/index.php/'+secondSurveyID+'?lang='+secondSurveyLanguage+'&newtest=Y'){
-            setEndURL(secondSurveyServer+'/index.php/'+secondSurveyID+'?lang='+secondSurveyLanguage+'&newtest=Y')
+        if (url.current != secondSurveyServer+'/index.php/'+secondSurveyID){
+            setEndURL(secondSurveyServer+'/index.php/'+secondSurveyID)
         }
-    }, [secondSurveyServer, secondSurveyID, secondSurveyLanguage])
+    }, [secondSurveyServer, secondSurveyID])
 
     useEffect(() => {
         async function userInRoom() {
@@ -104,15 +103,6 @@ export default function SettingsPageSecond() {
                                                         '2nd Survey ID', 'e.g. 347491', 
                                                         setSecondSurveyID, secondSurveyID, true, changeURLCheck
                                                     )}
-                                                    {langPass ? 
-                                                        TextFieldMain(
-                                                            '2nd Survey Language', '2nd Survey Language', 
-                                                            setSecondSurveyLanguage, secondSurveyLanguage, true, true
-                                                        ) : 
-                                                        TextFieldMain(
-                                                            '2nd Survey Language', '2nd Survey Language', 
-                                                            setSecondSurveyLanguage, secondSurveyLanguage, true, changeURLCheck
-                                                        )}
                                                     {confirmCheck(langPass, setLangPass, true)}
                                                 </div>
                                                 <div className="main-content-card-end-url">
@@ -134,7 +124,7 @@ export default function SettingsPageSecond() {
                                                                 <button 
                                                                     className="button-change-end-url"
                                                                     onClick={() => {
-                                                                        setEndURL([secondSurveyServer,'/index.php/',secondSurveyID,'?lang=',secondSurveyLanguage,'&newtest=Y'].join(''))
+                                                                        setEndURL([secondSurveyServer,'/index.php/',secondSurveyID].join(''))
                                                                         setChangeURLCheck(false)
                                                                     }}
                                                                 >
@@ -184,7 +174,7 @@ export default function SettingsPageSecond() {
                                 username: username,
                                 secondSurveyID: secondSurveyID,
                                 secondSurveyServer: secondSurveyServer,
-                                secondSurveyLanguage: secondSurveyLanguage,
+                                secondSurveyLanguage: '', //Out of date
                                 passLang:langPass,
                                 endURL: endURL,
                                 data: {}
@@ -201,7 +191,7 @@ export default function SettingsPageSecond() {
                             navigate('/user/settings2')
                           })
                     }}
-                    disabled={endURL == 'https://surveys.ak.tu-berlin.de/index.php/?lang=de' || endURL == '' ? true : false}
+                    disabled={endURL == 'https://surveys.ak.tu-berlin.de/index.php/' || endURL == '' ? true : false}
                 >
                     Save
                 </Button> : 
@@ -218,7 +208,7 @@ export default function SettingsPageSecond() {
                                 username: username,
                                 secondSurveyID: secondSurveyID,
                                 secondSurveyServer: secondSurveyServer,
-                                secondSurveyLanguage: secondSurveyLanguage,
+                                secondSurveyLanguage: '',//Out of date
                                 passLang:langPass,
                                 endURL: endURL,
                             }),

@@ -18,12 +18,10 @@ export default function CreateRoom () {
                     <div class="room-header-content-container">
                         <div class="room-header-content-container-inner">
                         <span class="logo-tu-berlin">
-                            <img src="../../../static/images/logo_grau-schwarz.png" width="25.755" height="25" />
-                            <img src="../../../static/images/TU-Berlin-Logo.svg" width="34.09" height="25" />
+                            {/* <img src="../../../static/images/logo_grau-schwarz.png" width="25.755" height="25" />
+                            <img src="../../../static/images/TU-Berlin-Logo.svg" width="34.09" height="25" /> */}
+                            <img src="../../../static/images/SpotiveyLogo2_Schrift.svg" width="100%" height="100%"/>
                         </span>
-                        <h1 class="room-header-tu-berlin">
-                            Spotivey
-                        </h1>
                         </div>
                     </div>
                 </header>

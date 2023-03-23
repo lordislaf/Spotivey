@@ -611,10 +611,12 @@ export default function Room (props) {
       dataAll = [savedTracks, topTracks, recentlyTracks , topArtists, followedArtists, currentPlaylists]
       let paramsURL = selectedOption ? getGetParams(questionTypeCheck, selectedOption, dataFieldsCheck, idName, idTracks, idArtists, idPlaylists, 
         dataAll, endURLSecondSurvey, checkArray) : null
+
+      let allParams = '&' + props.paramsObjectSession.map(item => item.join('=')).join('&')
         
       let passURL = !passLang ? 
         [endURLSecondSurvey,paramsURL,'&partID=',props.participant].join('') :
-        [endURLSecondSurvey,paramsURL,'&partID=',props.participant,'&lang=',props.language].join('')
+        [endURLSecondSurvey,paramsURL,'&partID=',props.participant,allParams].join('')
       
       let win = window.open(passURL, '_blank')
       win.focus();
@@ -723,9 +725,12 @@ export default function Room (props) {
       dataAll = [savedTracks, recentlyTracks, topTracks, topArtists, followedArtists, currentPlaylists]
       let paramsURL = getGetParams(questionTypeCheck, selectedOption, dataFieldsCheck, idName, idTracks, idArtists, idPlaylists, 
         dataAll, endURLSecondSurvey)
+
+      let allParams = '&' + props.paramsObjectSession.map(item => item.join('=')).join('&')
+      
       let passURL = !passLang ? 
         [endURLSecondSurvey,paramsURL,'&partID=',props.participant].join('') :
-        [endURLSecondSurvey,paramsURL,'&partID=',props.participant,'&lang={',props.language, '}'].join('')
+        [endURLSecondSurvey,paramsURL,'&partID=',props.participant,allParams].join('')
       
       let win = window.open(passURL, '_blank')
       console.log(passLang, passURL)
@@ -742,12 +747,10 @@ export default function Room (props) {
             <div class="room-header-content-container">
               <div class="room-header-content-container-inner">
                 <span class="logo-tu-berlin">
-                  <img src="../../../static/images/logo_grau-schwarz.png" width="25.755" height="25" />
-                  <img src="../../../static/images/TU-Berlin-Logo.svg" width="34.09" height="25" />
+                  {/* <img src="../../../static/images/logo_grau-schwarz.png" width="25.755" height="25" />
+                  <img src="../../../static/images/TU-Berlin-Logo.svg" width="34.09" height="25" /> */}
+                  <img src="../../../static/images/SpotiveyLogo2_Schrift.svg" width="100%" height="100%"/>
                 </span>
-                <h1 class="room-header-tu-berlin">
-                    Spotivey
-                </h1>
               </div>
             </div>
         </header>

@@ -14,8 +14,8 @@ export function confirmCheck(
             <div className={"confirm-container"} style={confirmStyle}>
                 {passParams ? 
                 <h5 className={"confirm-container-title"}>
-                    Would you like to pass the language code for a bilingual questionnaire? <br></br>
-                    <u>Note:</u> The language code is automatically passed to the follow-up questionnaire via the URL
+                    Would you like to pass on any URL-Parameter from 1st to 2nd Survey? <br></br>
+                    <u>Note:</u> This setting is helpful for example for multilingual studies.
                 </h5> :
                 <h5 className={"confirm-container-title"}>
                     Would you like to receive confirmation of the results from the test persons? <br></br>

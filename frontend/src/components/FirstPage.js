@@ -34,6 +34,7 @@ export default function FirstPage () {
   const [participant, setParticipant] = useState(null)
   const [surveyID, setSurveyID] = useState(null)
   const [language, setLanguage] = useState(null)
+  const [paramsObjectSession, setParamsObjectSession] = useState(null)
 
   const [createRoom, setCreateRoom] = useState(null)
   const [redirectCheck, setRedirect] = useState(null)
@@ -42,15 +43,26 @@ export default function FirstPage () {
     setRoomCode(null)
   }
 
+  function paramsToObject(entries) {
+    const result = []
+    for(const [key, value] of entries) { // each 'entry' is a [key, value] tupple
+      result.push([key, value])
+    }
+    return result;
+  }
+
   useEffect(() => {
     const url = new URL(window.location.href)
+    const paramsObject = paramsToObject(url.searchParams.entries())
+    console.log(paramsObject)
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         surveyID: url.searchParams.get('surveyID'),
         participant: url.searchParams.get('participant'),
-        lang: url.searchParams.get('lang')
+        lang: url.searchParams.get('lang'),
+        paramsObject:paramsObject,
       }),
     };
     if (!createRoom){
@@ -77,6 +89,7 @@ export default function FirstPage () {
           setRoomCode(data.roomCode)
           setParticipant(data.participant)
           setWelcomePageOK(data.welcome)
+          setParamsObjectSession(data.paramsObject)
         });
     }
   }, [createRoom])
@@ -105,6 +118,7 @@ export default function FirstPage () {
                 welcomePageOK={welcomePageOK} 
                 setWelcomePageOK={setWelcomePageOK}
                 language={language}
+                paramsObjectSession={paramsObjectSession}
               />
             }
           />

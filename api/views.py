@@ -458,6 +458,7 @@ class CreateRoomView(APIView):
                     if self.request.session['surveyID'] != request.data.get('surveyID'):
                         self.request.session['surveyID'] = request.data.get('surveyID')
                         self.request.session['language'] = request.data.get('lang')
+                        self.request.session['paramsObject'] = request.data.get('paramsObject')
                         self.request.session['welcome'] = None
                         token = SpotifyToken.objects.filter(user=self.request.session.session_key)
                         if token.exists():
@@ -466,6 +467,7 @@ class CreateRoomView(APIView):
                     if self.request.session['participant'] != request.data.get('participant'):
                         self.request.session['participant'] = request.data.get('participant')
                         self.request.session['language'] = request.data.get('lang')
+                        self.request.session['paramsObject'] = request.data.get('paramsObject')
                         self.request.session['welcome'] = None
                         token = SpotifyToken.objects.filter(user=self.request.session.session_key)
                         if token.exists():
@@ -491,6 +493,7 @@ class CreateRoomView(APIView):
                 self.request.session['surveyID'] = request.data.get('surveyID')
                 self.request.session['participant'] = request.data.get('participant')
                 self.request.session['language'] = request.data.get('lang')
+                self.request.session['paramsObject'] = request.data.get('paramsObject')
                 return Response(RoomSerializer(room).data, status=status.HTTP_200_OK)
             else:
                 room = Room(host=host, surveyID=surveyID, participant=participant)
@@ -499,6 +502,7 @@ class CreateRoomView(APIView):
                 self.request.session['surveyID'] = request.data.get('surveyID')
                 self.request.session['participant'] = request.data.get('participant')
                 self.request.session['language'] = request.data.get('lang')
+                self.request.session['paramsObject'] = request.data.get('paramsObject')
                 return Response(RoomSerializer(room).data, status=status.HTTP_201_CREATED)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -542,6 +546,7 @@ class UserInRoom(APIView):
             self.request.session['participant'] = None
             self.request.session['welcome'] = None
             self.request.session['language'] = None
+            self.request.session['paramsObject'] = None
 
         if 'fullname' in self.request.session:
             fullName = self.request.session['fullname']
@@ -556,6 +561,7 @@ class UserInRoom(APIView):
             'participant': self.request.session.get('participant'),
             'welcome': self.request.session.get('welcome'),
             'language': self.request.session.get('language'),
+            'paramsObject': self.request.session.get('paramsObject'),
             'fullName': fullName,
             'resultExist': resultExist
         }
