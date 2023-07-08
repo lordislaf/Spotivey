@@ -73,6 +73,10 @@ class saveToCSVFileView(APIView):
             userFollowers = []
             userProduct = []
 
+            tracksPlayedAt = []
+            tracksContextType = []
+            tracksContextUri = []
+
             settingsObject = Settings.objects.filter(umfrageID=surveyID)
 
             savedTracks = SavedTracksSpotify.objects.filter(settings__in=settingsObject, confirm=True).values_list(
@@ -184,6 +188,11 @@ class saveToCSVFileView(APIView):
                                         tracksAddedAt[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('added_at'))
                                         tracksPopularity[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('popularity'))
 
+                                        if dataString == 'recentlyTracksData':
+                                            tracksPlayedAt.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('playedAt'))
+                                            tracksContextType.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('contextType'))
+                                            tracksContextUri.append(allDataArray[indexPart][count[indexPart]].get(dataString).get('contextUri'))
+
                                         tracksAcousticness[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('acousticness'))
                                         tracksDanceability[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('danceability'))
                                         tracksEnergy[indexPart].append(allDataArray[indexPart][count[indexPart]].get(dataString).get('dataAudioFeatures').get('energy'))
@@ -243,6 +252,10 @@ class saveToCSVFileView(APIView):
                         tracksLiveness[indexPart] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
                         tracksValence[indexPart] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
                         tracksTempo[indexPart] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
+                    elif indexPart==2:
+                        tracksPlayedAt += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
+                        tracksContextType += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
+                        tracksContextUri += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
                     elif indexPart > 2 and indexPart < 5:
                         artistsType[indexPart-3] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
                         artistsPopularity[indexPart-3] += [''] * (countDataParticipantTranspose[indexCount][laengeIndexMax[indexCount]] - (index))
@@ -332,6 +345,9 @@ class saveToCSVFileView(APIView):
                     'last_tracks_liveness': tracksLiveness[2][i],
                     'last_tracks_valence': tracksValence[2][i],
                     'last_tracks_tempo': tracksTempo[2][i],
+                    'last_tracks_played_at': tracksPlayedAt[i],
+                    'last_tracks_context_type': tracksContextType[i],
+                    'last_tracks_context_uri': tracksContextUri[i],
                     'top_artists_type': artistsType[0][i],
                     'top_artists_popularity': artistsPopularity[0][i],
                     'top_artists_followers': artistsFollowers[0][i],
@@ -968,7 +984,7 @@ class getSettingsFromIDView(APIView):
                 settingsPassLang = np.array(settingsTwo.values_list('passLang'))
                 settingsTwoData = np.array(settingsTwo.values_list('secondSurveyData'))
                 if len(settingsTwoDataEndURL)==0 :
-                    settingsPassLang = None
+                    passLang = None
                     secondEndUrl = None
                     selectedOption = None
                     questionTypeCheck = None

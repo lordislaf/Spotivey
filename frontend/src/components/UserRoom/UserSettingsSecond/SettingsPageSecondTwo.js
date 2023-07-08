@@ -38,7 +38,7 @@ export default function SettingsPageSecondTwo (props) {
 
     const idName = ['SavdTracks', 'TopTracks', 'LastTracks', 'TopArtists', 'FolArtists', 'Playlist']
 
-    const idTracks = ['SpotID', 'Title', 'Artist', 'Label', 'RelDat', 'Cover', 'Player']
+    const idTracks = ['SpotID', 'Title', 'Artist', 'Label', 'RelDat', 'Cover', 'Player','PlayAt', 'ConTyp', 'ConURI']
     const idArtists = ['SpotID', 'AName', 'Cover', 'Genres']
     const idPlaylists = ['SpotID', 'PName', 'Cover']
 
@@ -61,7 +61,7 @@ export default function SettingsPageSecondTwo (props) {
     const [checkRecentlyTracks, setCheckRecentlyTracks] = useState(false)
 
     const dataFieldsTracksArray = ['Spotify ID', 'Track Title', 'Artist', 'Label', 'Release Date','Cover', 
-    'Player (including a track name, artist name and cover)']
+    'Player (including a track name, artist name and cover)', 'Played At', 'Context Type', 'Context URI']
 
     const dataFieldsArtistsArray = ['Spotify ID', 'Artist Name', 'Cover', 'Genre']
 
@@ -77,7 +77,7 @@ export default function SettingsPageSecondTwo (props) {
     const [dataFieldsCheckArray, setDataFieldsCheckArray] = useState([[
         [false, false, false, false, false, false, false], 
         [false, false, false, false, false, false, false], 
-        [false, false, false, false, false, false, false]
+        [false, false, false, false, false, false, false, false, false, false]
     ], [
         [false, false, false, false], 
         [false, false, false, false]
@@ -288,7 +288,7 @@ export default function SettingsPageSecondTwo (props) {
                         {dataFieldsArray.map((dataField, index) => {
                             return(
                                 <React.Fragment>
-                                    <div className={"confirm-container-checkbox"} id={'dataField-'+index}>
+                                    {index2 == 0 && i == 2 && <div className={"confirm-container-checkbox"} id={'dataField-'+index}>
                                         <label 
                                             className={"second-survey-container-title"} 
                                             id={idName + 'dataField-' + index}
@@ -301,7 +301,7 @@ export default function SettingsPageSecondTwo (props) {
                                             <span id={"span-css-second-survey"}></span>
                                             {dataField}
                                         </label>
-                                    </div>
+                                    </div>}
                                 </React.Fragment>
                             )
                         })}

@@ -145,7 +145,8 @@ def spotify_callback2(request, format=None):
     update_or_create_user_tokens(
         request.session.session_key, access_token, token_type, expires_in, refresh_token)
     
-    return redirect('https://127.0.0.1:8000/user/results') ###CHANGE THIS LINE
+    return redirect('https://spotivey.users.ak.tu-berlin.de/user/results')
+    #return redirect('http://127.0.0.1:8000/user/results')
 
 
 class IsAuthenticated(APIView):
@@ -549,13 +550,14 @@ class GetSavedTracksSpotify(APIView):
             return Response({}, status=status.HTTP_404_NOT_FOUND)
 
         host = roommodel.host
+
         if market != '':
             endpoint = "me/tracks?market=" + market + "&limit=" + limit
         else:
             endpoint = "me/tracks?limit=" + limit
 
         response = execute_spotify_api_request(host, endpoint)
-
+        
         if 'error' in response or 'items' not in response:
             return Response(response, status=status.HTTP_204_NO_CONTENT)
         
@@ -965,6 +967,7 @@ class GetRecentlyPlayedTracksSpotify(APIView):
         track_infos = []
         item = np.array(item)
         item_top = list(item[random_10])
+        
         for j in range(anzahl_tracks):
             item_top_j = item_top[j]
             duration_ms = item_top_j.get('track').get('duration_ms')
@@ -976,6 +979,8 @@ class GetRecentlyPlayedTracksSpotify(APIView):
             track_id = item_top_j.get('track').get('id')
 
             played_at = item_top_j.get('played_at')
+            context_type = item_top_j.get('context').get('type') if item_top_j.get('context') else None
+            context_uri = item_top_j.get('context').get('uri') if item_top_j.get('context') else None
 
             dataAudioFeatures = getAudioFeatures(host, track_id)
             popularity = item_top_j.get('track').get('popularity')
@@ -1032,6 +1037,9 @@ class GetRecentlyPlayedTracksSpotify(APIView):
                 'albumLabel': albumLabel,
                 'albumName': albumName.replace("\"", "\'"),
                 'releaseDate': releaseDate,
+                'playedAt': played_at,
+                'contextType': context_type,
+                'contextUri': context_uri,
                 'dataAudioFeatures': dataAudioFeatures
             }
 

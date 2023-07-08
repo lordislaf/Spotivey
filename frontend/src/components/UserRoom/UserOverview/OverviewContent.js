@@ -79,7 +79,7 @@ export default function OverviewContent(username){
                         Development and hosting of Spotivey
                     </h2>
                     <h3 class='settings-overview-text'>
-                        Version: 1.0 (2022)
+                        Version: 1.0 (2023)
                         <br></br>
                         Spotivey was originally developed as part of a master thesis 
                         in audio communication by Matthias Ladleif using Python (backend) 
@@ -91,9 +91,9 @@ export default function OverviewContent(username){
                         If you are drawing on Spotivey in your own research, please don't forget 
                         to cite the original authors as follows: 
                         <div className="cite-version">
-                            Ladleif, M. & Lepa, S. (2023). Spotivey – 
-                            Eine Web-Applikation zur vereinfachten Nutzung der Spotify-API im 
-                            Rahmen Online-Fragebogenstudien. <i>Publizistik</i>. In press. 
+                            Ladleif, M., Lepa, S. Spotivey – 
+                            eine Web-Applikation zur vereinfachten Nutzung der Spotify-API für Online-Fragebogenstudien. <i>Publizistik</i> (2023). <br></br>
+                            <a href='https://doi.org/10.1007/s11616-023-00790-y' target="_blank">https://doi.org/10.1007/s11616-023-00790-y</a> 
                         </div>
                     </h3>
                     <h2 class='settings-subtitle-text'>

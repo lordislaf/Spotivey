@@ -35,7 +35,7 @@ export default function Room (props) {
 
   const idName = ['SavdTracks', 'TopTracks', 'LastTracks', 'TopArtists', 'FolArtists', 'Playlist']
 
-  const idTracks = ['SpotID', 'Title', 'Artist', 'Label', 'RelDat', 'Cover', 'Player']
+  const idTracks = ['SpotID', 'Title', 'Artist', 'Label', 'RelDat', 'Cover', 'Player','PlayAt', 'ConTyp', 'ConURI']
   const idArtists = ['SpotID', 'Title', 'Cover', 'Genres']
   const idPlaylists = ['SpotID', 'Title', 'Cover']
 

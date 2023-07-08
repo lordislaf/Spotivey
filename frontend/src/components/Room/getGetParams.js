@@ -69,6 +69,16 @@ export default function getGetParams(
                                 stringParam += questionName + '=' + coverSrc
                             } else if (getIDs[idZaehler] === 'RelDat') {
                                 stringParam += questionName + '=' + dataAllOnlyCheck[j].releaseDate
+                            } else if (getIDs[idZaehler] === 'PlayAt') {
+                                stringParam += questionName + '=' + dataAllOnlyCheck[j].playedAt
+                            } else if (getIDs[idZaehler] === 'ConTyp') {
+                                if (dataAllOnlyCheck[j].contextType){
+                                    stringParam += questionName + '=' + dataAllOnlyCheck[j].contextType
+                                }
+                            } else if (getIDs[idZaehler] === 'ConURI') {
+                                if(dataAllOnlyCheck[j].contextUri){
+                                    stringParam += questionName + '=' + dataAllOnlyCheck[j].contextUri
+                                }
                             } else {
                                 let playerSrc = encodeURIComponent(
                                     'https://open.spotify.com/embed/track/' + dataAllOnlyCheck[j].spotify_id

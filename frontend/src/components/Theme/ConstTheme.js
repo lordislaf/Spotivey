@@ -8,10 +8,10 @@ export const themeOptions = createTheme({
       main: '#C40D1E',
     },
     secondary: {
-      main: '#f50057',
+      main: '#A5A7DD',
     },
   },
   typography: {
-    fontFamily: 'Federo',
+    fontFamily: "'Kumbh Sans', sans-serif",
   },
 });
